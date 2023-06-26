@@ -1,0 +1,3 @@
+docker exec -it watchlist-db psql -U postgres
+
+docker run -d -p 5432:5432 -e POSTGRES_DB=watchlist -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=root -v /mydata:/var/lib/postgresql/data --name watchlist-db postgres
