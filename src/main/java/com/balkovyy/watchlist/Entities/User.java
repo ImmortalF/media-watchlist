@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -32,7 +33,8 @@ public class User {
 
     private String username;
 
-    private String role;
+    @ElementCollection(fetch = FetchType.EAGER)
+    private Set<UserRole> roles;
 
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
@@ -41,3 +43,4 @@ public class User {
 
 
 }
+
