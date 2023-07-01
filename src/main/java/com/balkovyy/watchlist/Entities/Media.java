@@ -15,10 +15,7 @@ import java.util.List;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Media {
 
     @Id
@@ -39,5 +36,8 @@ public class Media {
     @JsonIgnore
     private List<Status> statuses;
 
-
+    @OneToMany(mappedBy = "media")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Comment> comments;
 }

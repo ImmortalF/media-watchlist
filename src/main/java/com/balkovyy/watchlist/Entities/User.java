@@ -15,16 +15,12 @@ import java.util.List;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long Id;
-
 
     private String password;
 
@@ -39,5 +35,9 @@ public class User {
     @JsonIgnore
     private List<Status> statuses;
 
+    @OneToMany(mappedBy = "user")
+    @ToString.Exclude
+    @JsonIgnore
+    private List<Comment> comments;
 
 }

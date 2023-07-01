@@ -15,31 +15,22 @@ import lombok.*;
 @AllArgsConstructor
 public class Status {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
+        private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    @JsonIdentityInfo
-            (
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id"
-    )
+        @ManyToOne
+        @JoinColumn(name = "user_id")
+        @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
-    private User user;
+        private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "media_id")
-    @JsonIdentityInfo(
-            generator = ObjectIdGenerators.PropertyGenerator.class,
-            property = "id"
-    )
+        @ManyToOne
+        @JoinColumn(name = "media_id")
+        @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 
-    private Media media;
+        private Media media;
 
-    @Column
-    private String status;
-
+        private String status;
 
 }
