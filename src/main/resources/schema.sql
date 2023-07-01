@@ -1,48 +1,36 @@
-CREATE TABLE IF NOT EXISTS films (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    status VARCHAR(20) NOT NULL
+-- User table
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  username VARCHAR(255) UNIQUE NOT NULL,
+  password VARCHAR(255) NOT NULL,
+  email VARCHAR(255) UNIQUE NOT NULL,
+  role VARCHAR(255) DEFAULT "USER"
 );
 
-CREATE TABLE IF NOT EXISTS tv_series (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    status VARCHAR(20) NOT NULL
+-- Media table
+CREATE TABLE media (
+  id SERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description VARCHAR(255),
+  type VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE IF NOT EXISTS books (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    status VARCHAR(20) NOT NULL
+-- Comment table
+CREATE TABLE comments (
+  id SERIAL PRIMARY KEY,
+  commentText VARCHAR(255) NOT NULL,
+  userId INT NOT NULL,
+  mediaId INT NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (mediaId) REFERENCES media(id)
 );
 
-CREATE TABLE IF NOT EXISTS anime (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    status VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS manga (
-    id SERIAL PRIMARY KEY,
-    title VARCHAR(255) NOT NULL,
-    description TEXT,
-    status VARCHAR(20) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS users (
-    id SERIAL PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS user_lists (
-    id SERIAL PRIMARY KEY,
-    user_id INTEGER REFERENCES users(id),
-    item_id INTEGER,
-    item_type VARCHAR(20),
-    status VARCHAR(20) NOT NULL
+-- Status table
+CREATE TABLE status (
+  id SERIAL PRIMARY KEY,
+  userId INT NOT NULL,
+  mediaId INT NOT NULL,
+  status VARCHAR(255) NOT NULL,
+  FOREIGN KEY (userId) REFERENCES users(id),
+  FOREIGN KEY (mediaId) REFERENCES media(id)
 );
